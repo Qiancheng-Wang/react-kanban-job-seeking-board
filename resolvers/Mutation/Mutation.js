@@ -9,7 +9,7 @@ const createToken = (user, secret, expiresIn) => {
 
 const Mutation = {
   Mutation: {
-    signupUser: async (root, { username, email, password }, { User }) => {
+    signUp: async (root, { username, email, password }, { User }) => {
       const user = await User.findOne({ username });
 
       if (user) {
@@ -26,6 +26,21 @@ const Mutation = {
       }).save();
 
       return { token: createToken(newUser, process.env.SECRET, "1hr") };
+    },
+
+    signIn: async (root, { username, password }, { User }) => {
+      const user = await User.findOne({ username });
+
+      if (!user) {
+        throw new Error("User Not Exist");
+      }
+
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+      if (!isPasswordCorrect) {
+        throw new Error("Password incorrect");
+      }
+
+      return { token: createToken(user, process.env.SECRET, "1hr") };
     },
   },
 };

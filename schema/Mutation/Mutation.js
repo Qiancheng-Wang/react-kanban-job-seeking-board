@@ -1,6 +1,8 @@
 const Mutation = `
   type Mutation {
-    signupUser(username: String!, email: String!, password: String!): Token
+    signUp(username: String!, email: String!, password: String!): Token
+
+    signIn(username: String!, password: String!): Token
   }
 `;
 
