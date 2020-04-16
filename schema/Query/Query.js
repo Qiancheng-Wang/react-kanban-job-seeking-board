@@ -1,6 +1,8 @@
 const Query = `
   type Query {
-    getAllJobs: [Job]
+    validateService: String!
+
+    getCurrentUser: User
   }
 `;
 
