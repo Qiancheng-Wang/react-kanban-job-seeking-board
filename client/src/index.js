@@ -34,7 +34,6 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <WithSessionApp />
     </ApolloProvider>
-    ,
   </React.StrictMode>,
   document.getElementById("root")
 );

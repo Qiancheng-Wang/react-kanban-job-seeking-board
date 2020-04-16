@@ -7,10 +7,12 @@ import "./App.css";
 
 import history from "../history";
 
+import Navbar from "./Navbar/Navbar";
+import Kanban from "./Kanban/Kanban";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
 
-const App = ({ refetch }) => {
+const App = ({ refetch, session }) => {
   const { loading, error } = useQuery(VALIDATE_SERVICE);
 
   if (loading) {
@@ -29,30 +31,26 @@ const App = ({ refetch }) => {
     );
   }
 
+  const isAuthed = session && sessionStorage.token;
+
   return (
     <Router history={history}>
+      {isAuthed && <Navbar />}
       <Switch>
         <Route
-          path="/"
-          exact
-          render={() => (
-            <div className="App">
-              <h2>Main Component</h2>
-            </div>
-          )}
+          path="/kanban"
+          render={() => <Kanban refetch={refetch} session={session} />}
         />
         <Route
           path="/signup"
-          exact
-          render={() => <SignUp refetch={refetch} />}
+          render={() => <SignUp refetch={refetch} session={session} />}
         />
         <Route
           path="/signin"
-          exact
-          render={() => <SignIn refetch={refetch} />}
+          render={() => <SignIn refetch={refetch} session={session} />}
         />
 
-        <Redirect to="/" />
+        <Redirect from="/" to="/signin" />
       </Switch>
     </Router>
   );

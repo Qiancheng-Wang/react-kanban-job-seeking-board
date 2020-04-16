@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -53,9 +53,15 @@ const styles = (theme) => ({
   },
 });
 
-const SignIn = ({ classes, refetch }) => {
+const SignIn = ({ classes, session, refetch }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (session !== null) {
+      history.push("/kanban");
+    }
+  }, [session]);
 
   const [signinUser] = useMutation(SIGN_IN_USER);
 
@@ -65,7 +71,7 @@ const SignIn = ({ classes, refetch }) => {
     signinUser({ variables: { username, password } }).then(async ({ data }) => {
       sessionStorage.setItem("token", data.signIn.token);
       await refetch();
-      history.push("/");
+      history.push("/kanban");
     });
   };
 

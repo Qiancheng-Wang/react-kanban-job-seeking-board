@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import isEmpty from "lodash/isEmpty";
 
 import Avatar from "@material-ui/core/Avatar";
@@ -56,11 +56,17 @@ const styles = (theme) => ({
   },
 });
 
-const SignUp = ({ classes, refetch }) => {
+const SignUp = ({ classes, session, refetch }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  useEffect(() => {
+    if (session !== null) {
+      history.push("/kanban");
+    }
+  }, [session]);
 
   const [signupUser] = useMutation(SIGN_UP_USER);
 
