@@ -4,11 +4,13 @@ import { ApolloConsumer } from "react-apollo";
 import withStyles from "@material-ui/core/styles/withStyles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
+import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+
+import history from "../../history";
 
 const styles = {
   appBar: {
@@ -21,11 +23,51 @@ const styles = {
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  iconsContainer: {},
+  iconsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  navbarButton: {
+    height: 72,
+    width: 72,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 5,
+    fontSize: 14,
+    borderRadius: 5,
+    "&:hover": {
+      backgroundColor: "#575d66",
+    },
+  },
+  navbarButtonIcon: {
+    fontSize: 30,
+  },
+  navbarButtonText: {
+    marginTop: 2,
+    fontSize: 14,
+  },
 };
+
+const navbuttons = [
+  {
+    url: "/kanban",
+    state: "kanban",
+  },
+  {
+    url: "/job/add",
+    state: "jobadd",
+  },
+];
+
+const selectedBackgroundColor = "#0A83C4";
 
 const Navbar = ({ classes }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [navbarIndex, setNavbarIndex] = useState(0);
+
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {
@@ -37,7 +79,18 @@ const Navbar = ({ classes }) => {
     client.resetStore();
   };
 
-  const handleRedirectProfile = () => {};
+  const handleClickNarbarBtn = (index) => {
+    if (index === navbarIndex) return;
+
+    setNavbarIndex(index);
+    if (navbuttons[index].url) {
+      history.push(navbuttons[index].url);
+    }
+  };
+
+  const handleRedirectProfile = () => {
+    history.push("/profile");
+  };
 
   return (
     <ApolloConsumer>
@@ -45,15 +98,30 @@ const Navbar = ({ classes }) => {
         <AppBar className={classes.appBar}>
           <Toolbar>
             <div className={classes.iconsContainer}>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
+              <div
+                className={classes.navbarButton}
+                style={{
+                  backgroundColor: navbarIndex === 0 && selectedBackgroundColor,
+                }}
+                onClick={() => handleClickNarbarBtn(0)}
               >
-                <AccountCircle />
-              </IconButton>
+                <DashboardIcon className={classes.navbarButtonIcon} />
+                <div className={classes.navbarButtonText}>Kanban</div>
+              </div>
+              <div
+                className={classes.navbarButton}
+                style={{
+                  backgroundColor: navbarIndex === 1 && selectedBackgroundColor,
+                }}
+                onClick={() => handleClickNarbarBtn(1)}
+              >
+                <DashboardIcon className={classes.navbarButtonIcon} />
+                <div className={classes.navbarButtonText}>Job Add</div>
+              </div>
+              <div className={classes.navbarButton} onClick={handleMenu}>
+                <AccountCircle className={classes.navbarButtonIcon} />
+                <div className={classes.navbarButtonText}>Menu</div>
+              </div>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}

@@ -11,6 +11,7 @@ import Navbar from "./Navbar/Navbar";
 import Kanban from "./Kanban/Kanban";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
+import JobAdd from "./JobAdd/JobAdd";
 
 const App = ({ refetch, session }) => {
   const { loading, error } = useQuery(VALIDATE_SERVICE);
@@ -48,6 +49,18 @@ const App = ({ refetch, session }) => {
         <Route
           path="/signin"
           render={() => <SignIn refetch={refetch} session={session} />}
+        />
+        <Route
+          path="/job/add"
+          render={() => <JobAdd refetch={refetch} session={session} />}
+        />
+        <Route
+          path="/profile"
+          render={() => (
+            <div className="App">
+              <h2>Profile Page</h2>
+            </div>
+          )}
         />
 
         <Redirect from="/" to="/signin" />
