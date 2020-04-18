@@ -24,7 +24,7 @@ const JobSchema = Schema({
     type: Date,
     default: Date.now,
   },
-  created_username: { type: String },
+  created_id: { type: Schema.Types.ObjectId },
 });
 
 module.exports = mongoose.model("Job", JobSchema);

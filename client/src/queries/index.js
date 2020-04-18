@@ -9,6 +9,7 @@ export const VALIDATE_SERVICE = gql`
 export const GET_CURRENT_USER = gql`
   query {
     getCurrentUser {
+      _id
       username
       email
       joinDate

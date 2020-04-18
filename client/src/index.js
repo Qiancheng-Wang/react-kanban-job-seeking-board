@@ -30,10 +30,8 @@ const client = new ApolloClient({
 const WithSessionApp = withSession(App);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <WithSessionApp />
-    </ApolloProvider>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <WithSessionApp />
+  </ApolloProvider>,
   document.getElementById("root")
 );

@@ -42,6 +42,22 @@ const Mutation = {
 
       return { token: createToken(user, process.env.SECRET, "1hr") };
     },
+
+    addJob: async (
+      root,
+      { title, company, role_level, skill_set, job_description, created_id },
+      { Job }
+    ) => {
+      const newJob = await new Job({
+        title,
+        company,
+        role_level,
+        skill_set,
+        job_description,
+        created_id,
+      }).save();
+      return newJob;
+    },
   },
 };
 
