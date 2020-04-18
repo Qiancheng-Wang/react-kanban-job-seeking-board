@@ -15,3 +15,30 @@ export const SIGN_IN_USER = gql`
     }
   }
 `;
+
+export const ADD_JOB = gql`
+  mutation(
+    $title: String!
+    $role_level: ROLE_LEVEL!
+    $company: String!
+    $skill_set: [String]!
+    $job_description: String!
+    $created_id: ID
+  ) {
+    addJob(
+      title: $title
+      role_level: $role_level
+      company: $company
+      skill_set: $skill_set
+      job_description: $job_description
+      created_id: $created_id
+    ) {
+      title
+      role_level
+      company
+      skill_set
+      job_description
+      created_id
+    }
+  }
+`;
