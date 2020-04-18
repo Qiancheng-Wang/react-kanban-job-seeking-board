@@ -83,7 +83,7 @@ const SignIn = ({ classes, session, refetch }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign in
         </Typography>
         <div className={classes.form}>
           <Grid container spacing={2}>

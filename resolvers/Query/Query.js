@@ -13,6 +13,13 @@ const Query = {
 
       return user;
     },
+
+    getJobsByUserId: async (root, { _id }, { Job }) => {
+      const jobs = await Job.find({
+        created_id: _id,
+      });
+      return jobs;
+    },
   },
 };
 

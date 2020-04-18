@@ -24,6 +24,10 @@ const JobSchema = Schema({
     type: Date,
     default: Date.now,
   },
+  status: {
+    type: String,
+    default: "NEW",
+  },
   created_id: { type: Schema.Types.ObjectId },
 });
 

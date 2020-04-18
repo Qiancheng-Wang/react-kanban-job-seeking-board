@@ -3,6 +3,8 @@ const Query = `
     validateService: String!
 
     getCurrentUser: User
+
+    getJobsByUserId(_id: String!): [Job]
   }
 `;
 

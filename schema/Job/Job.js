@@ -7,6 +7,7 @@ const Job = `
     skill_set: [String]!
     job_description: String!
     createdDate: String
+    status: STATUS!
     created_id: ID
   }
 
@@ -17,6 +18,16 @@ const Job = `
     MID_LEVEL
     SENIOR
     PRINCIPLE
+  }
+
+  enum STATUS {
+    NEW
+    APPLIED
+    PHONE_INTERVIEW
+    ONLINE_INTERVIEW
+    ONSITE_INTERVIEW
+    OFFER
+    ACCEPTED
   }
 `;
 exports.Job = Job;
