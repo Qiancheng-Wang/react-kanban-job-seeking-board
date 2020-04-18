@@ -1,8 +1,20 @@
 import React, { useEffect } from "react";
 
+import withStyles from "@material-ui/core/styles/withStyles";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 import history from "../../history";
 
-const Kanban = ({ session }) => {
+const styles = (theme) => ({
+  container: {
+    width: "70%",
+    minWidth: 800,
+    maxWidth: 900,
+  },
+});
+
+const Kanban = ({ classes, session }) => {
   useEffect(() => {
     if (session === null || !sessionStorage.token) {
       history.push("/signin");
@@ -10,10 +22,10 @@ const Kanban = ({ session }) => {
   }, [session]);
 
   return (
-    <div className="App">
-      <h2>Kanban page</h2>
-    </div>
+    <Container component="main" className={classes.container}>
+      <CssBaseline />
+    </Container>
   );
 };
 
-export default Kanban;
+export default withStyles(styles)(Kanban);

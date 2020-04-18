@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import QueueIcon from "@material-ui/icons/Queue";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import history from "../../history";
@@ -115,7 +116,7 @@ const Navbar = ({ classes }) => {
                 }}
                 onClick={() => handleClickNarbarBtn(1)}
               >
-                <DashboardIcon className={classes.navbarButtonIcon} />
+                <QueueIcon className={classes.navbarButtonIcon} />
                 <div className={classes.navbarButtonText}>Job Add</div>
               </div>
               <div className={classes.navbarButton} onClick={handleMenu}>

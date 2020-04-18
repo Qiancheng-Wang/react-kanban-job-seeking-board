@@ -187,7 +187,6 @@ const JobAdd = ({ classes, session }) => {
                 fullWidth
                 id="Company"
                 label="Company"
-                autoFocus
                 onChange={(e) => setCompany(e.target.value)}
                 disabled={isDisabledField}
               />
@@ -202,7 +201,6 @@ const JobAdd = ({ classes, session }) => {
                 fullWidth
                 id="SkillSet"
                 label="Skill Set"
-                autoFocus
                 onChange={(e) => handleSkillSetString(e.target.value)}
                 disabled={isDisabledField}
               />
