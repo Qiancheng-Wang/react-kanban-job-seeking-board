@@ -13,6 +13,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import history from "../../history";
 
+import { navbuttons } from "../../constants";
+
 const styles = {
   appBar: {
     backgroundColor: "#0C2E33",
@@ -51,17 +53,6 @@ const styles = {
     fontSize: 14,
   },
 };
-
-const navbuttons = [
-  {
-    url: "/kanban",
-    state: "kanban",
-  },
-  {
-    url: "/job/add",
-    state: "jobadd",
-  },
-];
 
 const selectedBackgroundColor = "#0A83C4";
 

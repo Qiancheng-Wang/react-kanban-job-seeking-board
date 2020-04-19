@@ -23,11 +23,12 @@ const Job = `
   enum STATUS {
     NEW
     APPLIED
-    PHONE_INTERVIEW
-    ONLINE_INTERVIEW
+    VIRTUAL_INTERVIEW
+    TECHNICAL_TEST
     ONSITE_INTERVIEW
-    OFFER
-    ACCEPTED
+    OFFERED
+    ACCEPTED,
+    ARCHIEVED
   }
 `;
 exports.Job = Job;
