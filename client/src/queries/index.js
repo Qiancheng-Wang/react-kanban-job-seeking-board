@@ -16,3 +16,19 @@ export const GET_CURRENT_USER = gql`
     }
   }
 `;
+
+export const GET_JOBS_BY_USER_ID = gql`
+  query($_id: String!) {
+    getJobsByUserId(_id: $_id) {
+      _id
+      title
+      company
+      role_level
+      skill_set
+      job_description
+      createdDate
+      status
+      created_id
+    }
+  }
+`;
