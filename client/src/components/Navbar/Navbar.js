@@ -13,7 +13,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 
 import history from "../../history";
 
-import { navbuttons } from "../../constants";
+import { navbuttons } from "../../constants/data";
 
 const styles = {
   appBar: {

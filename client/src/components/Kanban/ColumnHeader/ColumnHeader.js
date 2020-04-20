@@ -2,9 +2,14 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
 
+import {
+  defaultColumnBackground,
+  columnHeaderTextBackground,
+} from "../../../constants/style";
+
 const styles = {
   container: {
-    backgroundColor: "#DEE9DE",
+    backgroundColor: defaultColumnBackground,
     borderRadius: 5,
     width: "100%",
     minHeight: 50,
@@ -12,7 +17,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
   },
-  text: { fontSize: 16, marginLeft: 5, color: "#5E6C84" },
+  text: { fontSize: 16, marginLeft: 5, color: columnHeaderTextBackground },
 };
 
 const ColumnHeader = ({ classes, title }) => {

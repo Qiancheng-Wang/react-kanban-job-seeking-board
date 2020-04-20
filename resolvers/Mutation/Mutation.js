@@ -58,6 +58,20 @@ const Mutation = {
       }).save();
       return newJob;
     },
+
+    moveJob: async (root, { _id, status }, { Job }) => {
+      const currentTime = new Date();
+
+      const newJob = await Job.findOneAndUpdate(
+        {
+          _id,
+        },
+        { $set: { status: status, updateDate: currentTime } },
+        { new: true }
+      );
+
+      return newJob;
+    },
   },
 };
 

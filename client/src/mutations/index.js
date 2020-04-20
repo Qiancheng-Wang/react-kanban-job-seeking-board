@@ -42,3 +42,19 @@ export const ADD_JOB = gql`
     }
   }
 `;
+
+export const MOVE_JOB = gql`
+  mutation($_id: String!, $status: String!) {
+    moveJob(_id: $_id, status: $status) {
+      title
+      role_level
+      company
+      skill_set
+      job_description
+      status
+      updateDate
+      createdDate
+      created_id
+    }
+  }
+`;

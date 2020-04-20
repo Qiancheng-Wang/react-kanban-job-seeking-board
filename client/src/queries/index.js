@@ -26,7 +26,7 @@ export const GET_JOBS_BY_USER_ID = gql`
       role_level
       skill_set
       job_description
-      createdDate
+      updateDate
       status
       created_id
     }
