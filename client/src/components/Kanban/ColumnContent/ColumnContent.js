@@ -7,6 +7,11 @@ import { Droppable } from "react-beautiful-dnd";
 
 import JobCard from "../JobCard/JobCard";
 
+import {
+  defaultColumnBackground,
+  draggingColumnBackground,
+} from "../../../constants/style";
+
 const styles = {
   container: {
     width: "100%",
@@ -18,9 +23,6 @@ const styles = {
   },
 };
 
-const isDragingBackground = "lightblue";
-const isDefaultBackground = "#DEE9DE";
-
 const ColumnContent = ({ classes, column, jobs }) => {
   return (
     <Droppable droppableId={column.id}>
@@ -31,8 +33,8 @@ const ColumnContent = ({ classes, column, jobs }) => {
             {...provided.droppableProps}
             style={{
               backgroundColor: snapshot.isDraggingOver
-                ? isDragingBackground
-                : isDefaultBackground,
+                ? draggingColumnBackground
+                : defaultColumnBackground,
             }}
             ref={provided.innerRef}
             key={uuidv4()}

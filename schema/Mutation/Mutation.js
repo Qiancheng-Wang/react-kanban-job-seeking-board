@@ -5,6 +5,8 @@ const Mutation = `
     signIn(username: String!, password: String!): Token
 
     addJob(title: String!, company: String!, role_level: ROLE_LEVEL!, skill_set: [String]! , job_description: String!, created_id: ID): Job
+
+    moveJob(_id: String! , status: String!): Job
   }
 `;
 

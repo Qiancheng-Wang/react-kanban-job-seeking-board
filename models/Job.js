@@ -24,6 +24,10 @@ const JobSchema = Schema({
     type: Date,
     default: Date.now,
   },
+  updateDate: {
+    type: Date,
+    default: Date.now,
+  },
   status: {
     type: String,
     default: "NEW",

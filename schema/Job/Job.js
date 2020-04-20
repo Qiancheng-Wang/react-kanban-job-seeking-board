@@ -6,6 +6,7 @@ const Job = `
     role_level: ROLE_LEVEL!
     skill_set: [String]!
     job_description: String!
+    updateDate: String
     createdDate: String
     status: STATUS!
     created_id: ID
