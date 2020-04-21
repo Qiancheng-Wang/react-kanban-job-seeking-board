@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import { debounce } from "@material-ui/core";
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import { green, red } from "@material-ui/core/colors";
 
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -21,6 +20,11 @@ import Tooltip from "@material-ui/core/Tooltip";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 
 import history from "../../history";
+
+import {
+  successSnackBarBackground,
+  errorSnackBarBackground,
+} from "../../constants/style";
 
 import { useMutation } from "react-apollo";
 import { ADD_JOB } from "../../mutations";
@@ -55,10 +59,10 @@ const styles = (theme) => ({
     right: -20,
   },
   successSnackBar: {
-    backgroundColor: green[600],
+    backgroundColor: successSnackBarBackground,
   },
   errorSnackBar: {
-    backgroundColor: red[500],
+    backgroundColor: errorSnackBarBackground,
   },
 });
 
