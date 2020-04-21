@@ -20,10 +20,11 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    borderRadius: 10,
   },
 };
 
-const ColumnContent = ({ classes, column, jobs }) => {
+const ColumnContent = ({ classes, column, jobs, draggingJob }) => {
   return (
     <Droppable droppableId={column.id}>
       {(provided, snapshot) => {
@@ -35,6 +36,10 @@ const ColumnContent = ({ classes, column, jobs }) => {
               backgroundColor: snapshot.isDraggingOver
                 ? draggingColumnBackground
                 : defaultColumnBackground,
+              border:
+                !!draggingJob && column.value !== draggingJob.status
+                  ? "2px dashed #3D70B2"
+                  : null,
             }}
             ref={provided.innerRef}
             key={uuidv4()}

@@ -26,10 +26,36 @@ const styles = {
     borderWidth: "1px 1px 0 0",
     borderRadius: "15px 5px 15px 5px",
     margin: "5px 2px 3px 2px",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "flex-end",
+  },
+  verticalLine: {
+    height: "143px",
+    width: 2,
+    margin: "0 1px 0 4px",
+    borderRadius: "15px",
+  },
+  contentContainer: {
+    width: "95%",
+    minHeight: "150px",
     position: "relative",
   },
   moreButton: { position: "absolute", bottom: 0, right: 0 },
   title: { fontSize: 12, marginLeft: 5, marginTop: 5 },
+  roleLevel: {
+    fontSize: 12,
+    marginLeft: 5,
+    marginTop: 5,
+    padding: "0 4px 0 4px",
+    borderRadius: 4,
+  },
+  updateDate: {
+    textDecoration: "underline",
+    fontSize: 12,
+    marginLeft: 5,
+    marginTop: 6,
+  },
 };
 
 const JobCard = ({ classes, index, job }) => {
@@ -49,7 +75,7 @@ const JobCard = ({ classes, index, job }) => {
               color: snapshot.isDragging
                 ? draggingJobCardText
                 : defaultJobCardText,
-              border: snapshot.isDragging
+              borderColor: snapshot.isDragging
                 ? draggingJobCardBorder
                 : defaultJobCardBorder,
               backgroundColor: snapshot.isDragging
@@ -59,69 +85,84 @@ const JobCard = ({ classes, index, job }) => {
             }}
             ref={provided.innerRef}
           >
-            <Typography
-              variant="button"
-              display="block"
-              className={classes.title}
-            >
-              {title}
-            </Typography>
-            <Grid container>
-              <Grid item xs={6}>
+            <div
+              className={classes.verticalLine}
+              style={{
+                backgroundColor: snapshot.isDragging ? "white" : "#ff6600",
+              }}
+            />
+            <div className={classes.contentContainer}>
+              <Typography
+                variant="button"
+                display="block"
+                className={classes.title}
+              >
+                {title}
+              </Typography>
+              <Grid container>
+                <Grid item xs={6}>
+                  <Typography
+                    variant="subtitle2"
+                    display="block"
+                    className={classes.title}
+                  >
+                    {company}
+                  </Typography>
+                </Grid>
+
                 <Typography
                   variant="subtitle2"
-                  display="block"
-                  className={classes.title}
-                >
-                  {company}
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  variant="subtitle2"
-                  display="block"
-                  className={classes.title}
+                  display="initial"
+                  className={classes.roleLevel}
+                  style={{
+                    backgroundColor: snapshot.isDragging
+                      ? defaultCardBackground
+                      : draggingJobCardBorder,
+                    color: snapshot.isDragging
+                      ? defaultJobCardText
+                      : draggingJobCardText,
+                  }}
                 >
                   {role_level}
                 </Typography>
               </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={4}>
-                <Typography
-                  variant="h6"
-                  display="block"
-                  className={classes.title}
-                >
-                  Update:
-                </Typography>
+              <Grid container>
+                <Grid item xs={4}>
+                  <Typography
+                    variant="h6"
+                    display="block"
+                    className={classes.title}
+                  >
+                    Update:
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Typography
+                    variant="p"
+                    display="block"
+                    className={classes.updateDate}
+                  >
+                    {date.slice(4, 16)}
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={8}>
-                <Typography
-                  variant="p"
-                  display="block"
-                  className={classes.title}
-                >
-                  {date.slice(4, 16)}
-                </Typography>
-              </Grid>
-            </Grid>
 
-            <IconButton
-              className={classes.moreButton}
-              style={{
-                color: snapshot.isDragging
-                  ? draggingJobCardText
-                  : defaultJobCardText,
-              }}
-            >
-              <Tooltip
-                title={"Click to see more details about this job"}
-                placement="right"
+              <IconButton
+                className={classes.moreButton}
+                style={{
+                  color: snapshot.isDragging
+                    ? draggingJobCardText
+                    : defaultJobCardText,
+                }}
               >
-                <MoreHorizIcon />
-              </Tooltip>
-            </IconButton>
+                <Tooltip
+                  title={"Click to see more details about this job"}
+                  placement="right"
+                >
+                  <MoreHorizIcon />
+                </Tooltip>
+              </IconButton>
+            </div>
           </div>
         );
       }}

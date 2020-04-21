@@ -4,11 +4,11 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import { green, red } from "@material-ui/core/colors";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
 import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+
 import history from "../../history";
 
 import { useQuery, useMutation } from "react-apollo";
@@ -16,6 +16,10 @@ import { GET_JOBS_BY_USER_ID } from "../../queries";
 import { MOVE_JOB } from "../../mutations";
 
 import { columns } from "../../constants/data";
+import {
+  successSnackBarBackground,
+  errorSnackBarBackground,
+} from "../../constants/style";
 
 import ColumnHeader from "./ColumnHeader/ColumnHeader";
 import ColumnContent from "./ColumnContent/ColumnContent";
@@ -55,10 +59,10 @@ const styles = {
     justifyContent: "center",
   },
   successSnackBar: {
-    backgroundColor: green[600],
+    backgroundColor: successSnackBarBackground,
   },
   errorSnackBar: {
-    backgroundColor: red[500],
+    backgroundColor: errorSnackBarBackground,
   },
 };
 
@@ -74,6 +78,8 @@ const Kanban = ({ classes, session }) => {
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [snackMessage, setSnackMessage] = useState("");
   const [isSnackBarError, setIsSnackBarError] = useState(false);
+
+  const [draggingJob, setDraggingJob] = useState(null);
 
   useEffect(() => {
     if (!isUndefined(data)) {
@@ -135,6 +141,8 @@ const Kanban = ({ classes, session }) => {
           setIsSnackBarOpen(true);
         });
     }
+
+    setDraggingJob(null);
   };
 
   return (
@@ -143,12 +151,20 @@ const Kanban = ({ classes, session }) => {
         <CssBaseline />
         <div className={classes.container}>
           <div className={classes.cardContainer}>
-            <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+            <DragDropContext
+              onDragEnd={(result) => onDragEnd(result)}
+              onDragStart={(result) =>
+                setDraggingJob(
+                  jobs.find((job) => job._id === result.draggableId)
+                )
+              }
+            >
               {columns.map((column) => (
                 <div className={classes.columnContainer} key={column.id}>
                   <ColumnHeader title={column.name} />
                   <ColumnContent
                     column={column}
+                    draggingJob={draggingJob}
                     jobs={filterColumnJobs(column.value)}
                   />
                 </div>
@@ -170,7 +186,14 @@ const Kanban = ({ classes, session }) => {
           !isSnackBarError ? classes.successSnackBar : classes.errorSnackBar
         }
         onClose={() => setIsSnackBarOpen(false)}
-      />
+      >
+        <SnackbarContent
+          className={
+            !isSnackBarError ? classes.successSnackBar : classes.errorSnackBar
+          }
+          message={snackMessage}
+        />
+      </Snackbar>
     </div>
   );
 };
